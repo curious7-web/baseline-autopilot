@@ -1,0 +1,40 @@
+# Baseline Autopilot 🚀
+
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com) [![NPM Version](https://img.shields.io/badge/npm-v1.0.0-blue)](https://www.npmjs.com/) [![License](https://img.shields.io/badge/license-MIT-lightgrey)](./LICENSE)
+
+**Automatically scan, analyze, and fix modern JavaScript & CSS to ensure Baseline compatibility.**
+
+Baseline Autopilot is a complete tooling ecosystem that eliminates the guesswork of browser support, giving developers the confidence to write modern code.
+
+![Demo GIF of the Baseline Autopilot Web Playground in action](demo.gif)
+_The interactive Web Playground, which analyzes and fixes code in real-time._
+
+---
+## The Problem
+
+Every web developer wastes time worrying, "Is this new web feature safe to use yet?" This uncertainty is a tax on productivity, forcing us to jump between MDN and `caniuse.com` instead of building.
+
+---
+## The Solution
+
+Baseline Autopilot solves this problem by integrating Baseline data directly into the developer workflow. It's an intelligent system that not only warns you about non-baseline features but also provides safe, automated fallbacks.
+
+---
+## ✨ Key Features
+
+This project is a complete ecosystem with four main components:
+
+* **✅ Command-Line Scanner**: A powerful CLI tool (`npm run scan`) to audit and fix an entire codebase at once.
+* **📄 Premium Web Report**: Generates a polished HTML report (`npm run demo`) with a full "Scan Insights" dashboard, browser compatibility data, and a side-by-side diff viewer.
+* **🎮 Interactive Web Playground**: A live web app (`npm run playground`) where anyone can paste code and see it get analyzed and fixed in real-time.
+* **🛡️ Automated CI/CD Guard**: A GitHub Action that can be configured to prevent non-baseline code from ever being merged.
+
+---
+## 🚀 Getting Started & Usage
+
+### Installation
+Clone the repository and install the dependencies.
+```bash
+git clone [https://github.com/](https://github.com/)<your-username>/baseline-autopilot.git
+cd baseline-autopilot
+npm install

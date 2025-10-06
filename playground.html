@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Baseline Autopilot Playground</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #0d1117; color: #c9d1d9; display: flex; flex-direction: column; height: 100vh; margin: 0; }
+        h1 { text-align: center; color: #58a6ff; margin: 20px 0; }
+        .container { display: flex; flex: 1; gap: 15px; padding: 0 15px 15px; }
+        .pane { display: flex; flex-direction: column; flex: 1; }
+        label { margin-bottom: 5px; font-weight: bold; }
+        textarea { flex: 1; background: #161b22; color: #c9d1d9; border: 1px solid #30363d; border-radius: 6px; font-family: monospace; font-size: 16px; padding: 10px; resize: none; }
+        .controls { text-align: center; padding: 10px; display: flex; justify-content: center; align-items: center; gap: 20px; }
+        .lang-selector { display: flex; gap: 15px; }
+        button { background: #238636; color: white; border: 1px solid rgba(240, 246, 252, 0.1); padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 16px; transition: background-color 0.2s; }
+        button:hover { background: #2ea043; }
+        button:disabled { background: #555; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+    <h1>🚀 Baseline Autopilot Playground</h1>
+    <div class="controls">
+        <div class="lang-selector">
+            <label><input type="radio" name="language" value="js" checked> JavaScript</label>
+            <label><input type="radio" name="language" value="css"> CSS</label>
+        </div>
+        <button onclick="analyzeCode()">Analyze</button>
+    </div>
+    <div class="container">
+        <div class="pane">
+            <label for="input-code">Your Code</label>
+            <textarea id="input-code" placeholder="Select a language and paste your code here...&#10;&#10;/* Try valid, non-baseline code to see the fix */&#10;article:has(span) { border: 1px solid red; }&#10;&#10;/* Or try broken code to test the error handling! */&#10;.broken { color: ; }"></textarea>
+        </div>
+        <div class="pane">
+            <label for="output-code">Result</label>
+            <textarea id="output-code" readonly></textarea>
+        </div>
+    </div>
+
+    <script>
+        async function analyzeCode() {
+            const button = document.querySelector('button');
+            const inputCode = document.getElementById('input-code').value;
+            const outputArea = document.getElementById('output-code');
+            const language = document.querySelector('input[name="language"]:checked').value;
+            
+            if (!inputCode.trim()) {
+                outputArea.value = 'Please paste some code to analyze.';
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = 'Analyzing...';
+            outputArea.value = '';
+
+            try {
+                const response = await fetch('/analyze', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ code: inputCode, language: language })
+                });
+                const result = await response.json();
+                if (result.error) {
+                    throw new Error(result.message);
+                }
+                outputArea.value = result.fixedCode;
+            } catch (error) {
+                outputArea.value = `An error occurred: ${error.message}`;
+            } finally {
+                button.disabled = false;
+                button.textContent = 'Analyze';
+            }
+        }
+    </script>
+</body>
+</html>

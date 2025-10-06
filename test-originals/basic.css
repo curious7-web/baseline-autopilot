@@ -1,0 +1,9 @@
+/* basic.css */
+/* Your tool should NOT find any issues in this file. */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  color: #333;
+}

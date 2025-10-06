@@ -1,0 +1,7 @@
+# Dependencies
+/node_modules
+
+# Generated artifacts
+/demo
+/test
+scan-report.md

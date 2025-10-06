@@ -1,0 +1,40 @@
+{
+  "name": "baseline-autopilot",
+  "version": "1.0.0",
+  "description": "Safe scanner + autofixer for modern JS/CSS web features",
+  "main": "src/scanner.js",
+  "scripts": {
+    "reset": "cp -r test-originals/. test/",
+    "scan": "node src/scanner.js ./test",
+    "generate": "node generate-demo.cjs",
+    "serve": "live-server demo/demo.html",
+    "demo": "npm run reset && npm run generate && npm run serve",
+    "dev": "npm run reset && npm run generate && live-server demo/demo.html --wait=100 & nodemon --watch src --watch test-originals -e js,css,cjs --exec \"npm run reset && npm run generate\"",
+    "playground": "node server.js",
+    "start": "node src/scanner.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "web",
+    "scanner",
+    "autofix",
+    "baseline",
+    "hackathon"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "acorn": "^8.15.0",
+    "diff": "^8.0.2",
+    "escodegen": "^2.1.0",
+    "estraverse": "^5.3.0",
+    "express": "^4.19.2",
+    "postcss": "^8.5.6",
+    "web-features": "^3.0.0"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "nodemon": "^3.1.0",
+    "postcss-scss": "^4.0.9"
+  }
+}

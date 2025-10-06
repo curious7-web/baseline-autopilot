@@ -1,0 +1,34 @@
+# .github/workflows/action.yml
+name: 'Baseline Autopilot Scan'
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Baseline Autopilot Scan
+        # The script will exit with an error if non-baseline code is found
+        run: node src/scanner.js ./path-to-your-code --report --audit
+
+      - name: Upload Scan Report
+        if: failure() # Only upload the report if the audit fails
+        uses: actions/upload-artifact@v3
+        with:
+          name: scan-report
+          path: scan-report.md
