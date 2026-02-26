@@ -8,7 +8,6 @@ async function applyCSSAutofix(cssCode) {
   const baselineAutopilotPlugin = () => {
     return {
       postcssPlugin: 'baseline-autopilot',
-      // The AtRule visitor now works correctly because of the new parser.
       AtRule: {
         'container': (atRule) => {
           issuesFound.add('css-container-queries');
@@ -46,8 +45,7 @@ async function applyCSSAutofix(cssCode) {
     };
   };
   baselineAutopilotPlugin.postcss = true;
-
-  // Run PostCSS with the new, more powerful parser
+  
   const result = await postcss([baselineAutopilotPlugin()]).process(cssCode, { from: undefined, syntax: postcssScss });
   
   return { fixedCode: result.css, issuesFound: Array.from(issuesFound) };
