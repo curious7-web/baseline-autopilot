@@ -7,7 +7,6 @@ const app = express();
 app.use(express.json({ limit: '5mb' }));
 app.use(express.static(__dirname)); 
 
-// The API endpoint that does the work
 app.post('/analyze', async (req, res) => {
     const { code, language } = req.body;
     let result;
@@ -18,7 +17,6 @@ app.post('/analyze', async (req, res) => {
         } else {
             result = applyJSAutofix(code);
         }
-        // This line correctly sends the full result object as JSON
         res.json(result);
     } catch (error) {
         res.status(500).json({ fixedCode: `An error occurred on the server: ${error.message}` });
