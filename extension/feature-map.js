@@ -1,6 +1,5 @@
 // src/feature-map.js
 module.exports = {
-  // --- CSS Features ---
   'css-has': {
     type: 'CSS',
     detect: /:has\(/
@@ -21,7 +20,6 @@ module.exports = {
     type: 'CSS',
     detect: /position:\s*sticky/
   },
-  // --- JavaScript Features ---
   'javascript-structuredclone': {
     type: 'JS',
     detect: /structuredClone\s*\(/
