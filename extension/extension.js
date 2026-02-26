@@ -19,8 +19,6 @@ const nonBaselineRules = Object.values(webFeatures)
         type: featureMap[feature.id].type
     }));
 
-// ... (The rest of the file is exactly the same as the last correct version) ...
-
 function updateDiagnostics(document, collection) {
     if (!['javascript', 'css'].includes(document.languageId)) return;
     const diagnostics = [];
@@ -58,7 +56,6 @@ class BaselineQuickFixProvider {
 
 class BaselineHoverProvider {
     provideHover(document, position, token) {
-        // This log will prove the hover function is running.
         console.log('Hover provider is being called!'); 
         
         const line = document.lineAt(position.line).text;
@@ -68,7 +65,6 @@ class BaselineHoverProvider {
             while ((match = regex.exec(line)) !== null) {
                 const matchRange = new vscode.Range(position.line, match.index, position.line, match[0].length);
                 if (matchRange.contains(position)) {
-                    // This is the simplest possible hover content that cannot fail.
                     const contents = new vscode.MarkdownString();
                     contents.appendMarkdown(`**${rule.name}** is not a Baseline feature.`);
                     return new vscode.Hover(contents, matchRange);
