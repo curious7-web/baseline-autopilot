@@ -1,31 +1,24 @@
-/* comprehensive-unsafe.css */
 
-/* Feature: Container Queries */
 @container (min-width: 800px) {
   .widget {
     font-size: 1.2rem;
   }
 }
-
-/* Feature: :has() selector */
 article:has(h2.special) {
   border: 2px solid purple;
 }
 
-/* Feature: aspect-ratio */
 .responsive-video {
   aspect-ratio: 16 / 9;
   width: 100%;
 }
 
-/* Feature: position: sticky */
 nav.main-nav {
   position: sticky;
   top: 0;
   background: #fff;
 }
 
-/* Feature: :focus-visible */
 a:focus-visible {
   outline: 3px solid skyblue;
 }
